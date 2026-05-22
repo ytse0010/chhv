@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>How Green is Melbourne?</title>
+
+  <!-- Import Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- title -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>How Green is Melbourne?</h1>
+        <p>
+          Melbourne is known for its parks, gardens and leafy streets. However, the city's greenery is not evenly
+          distributed. This visualisation explores Melbourne's urban forest through tree locations, tree species,
+          tree size, life expectancy and future planting priorities.
+        </p>
+      </div>
+    </div>
+
+    <!-- section 1 -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h2>Where are Melbourne's trees?</h2>
+          <p>
+            The first map shows the location of individual trees recorded by the City of Melbourne.
+            Each point represents one tree. By mapping every tree, we can see where greenery is concentrated
+            and where the urban forest appears more sparse.
+          </p>
+          <p>
+            This map provides the spatial foundation for the story: Melbourne has many trees, but they are not
+            spread evenly across all precincts.
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div id="tree_location_map" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- section 2 -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="tree_bubble_map" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div class="description description-right">
+          <h2>Where are the largest trees?</h2>
+          <p>
+            Not all trees contribute equally to the feeling of greenness. Larger and more mature trees often
+            provide stronger shade, greater visual impact and more environmental benefits.
+          </p>
+          <p>
+            This bubble map uses tree diameter to highlight where Melbourne's larger trees are located.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 3 -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Which precincts are greener?</h2>
+          <p>
+            Maps are useful for location, but bar charts make comparison easier. These charts compare tree
+            counts and average tree diameter across precincts.
+          </p>
+          <p>
+            A precinct with many trees is not always the same as a precinct with large mature trees.
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div id="tree_count_precinct" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div id="avg_diameter_precinct" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- section 4 -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="tree_scatter" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Tree quantity vs tree maturity</h2>
+          <p>
+            This scatterplot combines two ideas: how many trees a precinct has and how large those trees are on average.
+            Precincts with both high tree count and high average diameter may have a stronger urban forest presence.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 5 -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>What kinds of trees shape Melbourne?</h2>
+          <p>
+            Melbourne's urban forest is made up of many different species. Species diversity matters because it can
+            make the urban forest more resilient to disease, pests and climate stress. It also affects the character
+            of different streets and precincts.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 6 -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div id="top_species_chart" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div id="species_stacked_bar" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div id="species_heatmap" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- section 7 -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h2>Is Melbourne's urban forest future-ready?</h2>
+          <p>
+            A green city must keep renewing its urban forest. Tree diameter and useful life expectancy help us
+            understand whether Melbourne's trees are young, mature, aging or likely to need replacement in the future.
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div id="diameter_histogram" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- section 8 -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="life_expectancy_chart" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Useful life expectancy</h2>
+          <p>
+            Useful life expectancy gives a planning view of the urban forest. Areas with many trees in shorter
+            life expectancy categories may need more attention in future planting strategies.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 9 -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Where will Melbourne plant next?</h2>
+          <p>
+            The second dataset focuses on future planting schedules. This shifts the story from Melbourne's current
+            trees to the city's future greening priorities.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- section 10 -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="planting_year_chart" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-2">
+        <div id="planting_precinct_chart" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- section 11 -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="current_vs_future_chart" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Today vs tomorrow</h2>
+          <p>
+            The final chart brings the two datasets together. It compares current tree counts with future planting
+            records by precinct. This helps identify whether future planting is focused on already green areas or
+            areas that may need more trees.
+          </p>
+          <p>
+            Overall, Melbourne has a large and diverse urban forest, but its greenery is uneven. The city's future
+            greenness depends on where new trees are planted and whether mature trees can be sustained over time.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>
+          This visualisation is created by Yun-Jui Tseng for FIT2179 Data Visualisation 2.
+        </p>
+        <p>
+          Data sources: City of Melbourne Open Data - Trees with Species and Dimensions; Tree Planting Zone Schedules.
+        </p>
+        <p>
+          Created: May 2026. Generative AI was used to assist with planning, writing, layout and code explanation.
+        </p>
+      </div>
+    </div>
+
+  </div> <!-- end page -->
+
+  <!-- Vega-Lite embed code is stored in external JS file -->
+  <script src="vega_lite_vis.js"></script>
+
+</body>
+
+</html>
