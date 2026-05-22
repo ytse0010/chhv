@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 750,
+  "height": 500,
+  "background": "white",
+  "title": {
+    "text": "Tree Count vs Average Diameter by Precinct",
+    "subtitle": "Each dot represents one precinct. The chart compares tree quantity with average tree size.",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start",
+    "color": "#0b0b0a",
+    "subtitleColor": "#1d1c1b"
+  },
+  "data": {
+    "url": "../data/trees-with-species-and-dimensions-urban-forest.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum['Precinct'] != null && datum['Diameter Breast Height'] != null"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "tree_count"
+        },
+        {
+          "op": "mean",
+          "field": "Diameter Breast Height",
+          "as": "avg_diameter"
+        }
+      ],
+      "groupby": ["Precinct"]
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "size": 220,
+    "opacity": 0.82,
+    "stroke": "white",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "x": {
+      "field": "tree_count",
+      "type": "quantitative",
+      "title": "Number of Trees",
+      "axis": {
+        "labelColor": "#2F2A22",
+        "titleColor": "#2F2A22",
+        "gridColor": "#E8E1D2",
+        "tickColor": "#C9B98F",
+        "domainColor": "#C9B98F",
+        "format": ","
+      }
+    },
+    "y": {
+      "field": "avg_diameter",
+      "type": "quantitative",
+      "title": "Average Diameter Breast Height",
+      "axis": {
+        "labelColor": "#2F2A22",
+        "titleColor": "#2F2A22",
+        "gridColor": "#E8E1D2",
+        "tickColor": "#C9B98F",
+        "domainColor": "#C9B98F"
+      }
+    },
+    "color": {
+      "field": "Precinct",
+      "type": "nominal",
+      "scale": {
+        "range": [
+          "#2F5D50",
+          "#3E6F58",
+          "#5B7F52",
+          "#6B8E4E",
+          "#8FA765",
+          "#A7B77A",
+          "#C3BE73",
+          "#D6C97A",
+          "#E8CE88",
+          "#D8B873",
+          "#C9A66B",
+          "#B88C5A",
+          "#A67C52",
+          "#8A6542",
+          "#6F4E37",
+          "#4F3B2A"
+        ]
+      },
+      "legend": {
+        "title": "Precinct",
+        "orient": "right",
+        "labelColor": "#2F2A22",
+        "titleColor": "#2F2A22",
+        "labelFontSize": 11,
+        "titleFontSize": 13
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Precinct",
+        "type": "nominal",
+        "title": "Precinct"
+      },
+      {
+        "field": "tree_count",
+        "type": "quantitative",
+        "title": "Number of Trees",
+        "format": ","
+      },
+      {
+        "field": "avg_diameter",
+        "type": "quantitative",
+        "title": "Average Diameter",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

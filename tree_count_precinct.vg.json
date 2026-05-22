@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 560,
+  "height": 520,
+  "background": "white",
+  "title": {
+    "text": "Tree Count by Precinct",
+    "subtitle": "Share of recorded trees across all City of Melbourne precincts",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start",
+    "color": "#0b0b0a",
+    "subtitleColor": "#6F4E37"
+  },
+  "data": {
+    "url": "../data/trees-with-species-and-dimensions-urban-forest.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "tree_count"
+        }
+      ],
+      "groupby": ["Precinct"]
+    }
+  ],
+  "mark": {
+    "type": "arc",
+    "innerRadius": 90,
+    "outerRadius": 190,
+    "stroke": "white",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "theta": {
+      "field": "tree_count",
+      "type": "quantitative",
+      "title": "Number of Trees"
+    },
+    "color": {
+      "field": "Precinct",
+      "type": "nominal",
+      "scale": {
+        "range": [
+          "#2F5D50",
+          "#3E6F58",
+          "#5B7F52",
+          "#6B8E4E",
+          "#8FA765",
+          "#A7B77A",
+          "#C3BE73",
+          "#D6C97A",
+          "#E8CE88",
+          "#D8B873",
+          "#C9A66B",
+          "#B88C5A",
+          "#A67C52",
+          "#8A6542",
+          "#6F4E37",
+          "#4F3B2A"
+        ]
+      },
+      "legend": {
+        "title": "Precinct",
+        "orient": "right",
+        "labelColor": "#2F2A22",
+        "titleColor": "#2F2A22",
+        "labelFontSize": 11,
+        "titleFontSize": 13
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Precinct",
+        "type": "nominal",
+        "title": "Precinct"
+      },
+      {
+        "field": "tree_count",
+        "type": "quantitative",
+        "title": "Number of Trees",
+        "format": ","
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}
