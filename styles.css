@@ -1,0 +1,43 @@
+body {
+  background-color: #50f055;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.page {
+  width: 1100px;
+  background-color: rgb(23, 230, 61);
+  margin: auto;
+  padding: 50px;
+}
+
+h1 {
+  font-size: 42px;
+  color: #1f4d2b;
+}
+
+h2 {
+  color: #2f6b45;
+}
+
+.description {
+  padding: 20px;
+}
+
+.description-left {
+  padding-right: 30px;
+}
+
+.description-right {
+  padding-left: 30px;
+}
+
+.vis-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.small-font {
+  font-size: 13px;
+  color: #5cb63e;
+  margin-top: 30px;
+}
