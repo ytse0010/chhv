@@ -13,7 +13,7 @@
     "subtitleColor": "#1d1c1b"
   },
   "data": {
-    "url": "../data/trees-with-species-and-dimensions-urban-forest.csv"
+    "url": "https://raw.githubusercontent.com/ytse0010/chhv/refs/heads/main/trees-with-species-and-dimensions-urban-forest.csv"
   },
   "transform": [
     {
